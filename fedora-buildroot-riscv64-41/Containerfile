@@ -1,0 +1,11 @@
+FROM fedora.riscv.rocks:3000/davidlt/fedora-toolbox:41
+RUN dnf install -y \
+    selinux-policy-targeted \
+    policycoreutils \
+    dosfstools \
+    e2fsprogs \
+    xfsprogs \
+    btrfs-progs
+# Our hardcoded build.go:NewBuildrootFromContainer expects a /ostree
+# in the selinux labeling. workaround here for now.
+RUN mkdir -p /ostree
