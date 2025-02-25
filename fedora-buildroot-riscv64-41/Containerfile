@@ -6,7 +6,8 @@ COPY fedora-riscv-workaround.repo /etc/yum.repos.d/fedora-riscv-workaround.repo
 
 # ostree is only here because our BuildrotoFromContainer hardcodes it,
 # c.f. https://github.com/osbuild/images/blob/v0.118.0/pkg/manifest/build.go#L216
-RUN dnf install -y \
+# Setting timeout and retries to be graceful with slow mirrors
+RUN dnf install -y --setopt=timeout=120 --setopt=retries=10 \
     selinux-policy-targeted \
     policycoreutils \
     dosfstools \
