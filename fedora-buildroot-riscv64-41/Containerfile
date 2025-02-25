@@ -1,4 +1,15 @@
 FROM fedora.riscv.rocks:3000/davidlt/fedora-toolbox:41
+
+# repos are now incremental but container was not updated yet,
+# workaround this here
+RUN cat <<EOF > /etc/yum.repos.d/fedora-riscv-workaround.repo
+[fedira-riscv-non-staging]
+name=Fedora RISC-V
+baseurl=http://fedora.riscv.rocks/repos-dist/f41/latest/riscv64/
+enabled=1
+gpgcheck=0
+EOF
+
 # ostree is only here because our BuildrotoFromContainer hardcodes it,
 # c.f. https://github.com/osbuild/images/blob/v0.118.0/pkg/manifest/build.go#L216
 RUN dnf install -y \
