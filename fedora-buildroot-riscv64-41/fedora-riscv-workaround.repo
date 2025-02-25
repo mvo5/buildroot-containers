@@ -1,0 +1,6 @@
+[fedira-riscv-non-staging]
+name=Fedora RISC-V
+baseurl=http://fedora.riscv.rocks/repos-dist/f41/latest/riscv64/
+enabled=1
+gpgcheck=0
+
